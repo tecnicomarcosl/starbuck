@@ -1,0 +1,25 @@
+mkdir test-app-py && cd test-app-py
+python -m venv .env && source .env/bin/activate
+
+heroku login
+heroku create <nombre de nuestra aplicacion>
+heroku buildpacks:set heroku/python
+git init
+heroku git:remote -a <nombre de nuestra aplicacion>
+pip install flask
+Agregamos un archivo .gitignore para indicarle a git que ignore el directorio .env con el siguiente contenido: .env*
+pip freeze > requirements.txt
+git  add *
+git commit -am "Version 3"
+git push heroku master
+
+
+export FLASK_APP="run.py" && set "FLASK_APP=run.py"
+flask run
+flask shell
+db.create_all()
+
+instalar heroku-cli
+
+heroku create example #crear app con nombre example
+heroku buildpacks:set heroku/python

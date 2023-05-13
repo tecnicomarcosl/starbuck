@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+
+    <div class="notification is-success">
+        {{ messages[0] }}.
+    </div>
+
+{% endif %}
+{% endwith %}
+
+<form method="POST" action="/contacto">
+
+<div class="column is-4 is-offset-4">
+
+    <h3 class="title">Contacto</h3>
+
+    <div class="box">
+        <form method="POST" action="/contacto">
+
+           <div class="field">
+               <div class="control">
+                   <input class="input is-large" type="text" name="nombre" placeholder="Nombre" autofocus="">
+               </div>
+           </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+                </div>
+            </div>
+
+    </div>
+</div>
+
+<div class="field-body">
+    <div class="field">
+      <div class="control">
+
+        <textarea class="textarea" name="consulta" placeholder="Escriba su consulta. Se le respondera a la brevedad"></textarea>
+
+      </div>
+    </div>
+</div>
+
+        <button class="button is-block is-info is-large is-fullwidth">Enviar</button>
+
+</form>
+
+{% endblock %}

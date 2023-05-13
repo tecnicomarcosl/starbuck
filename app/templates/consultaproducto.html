@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+
+    <div class="notification is-success">
+        {{ messages[0] }}.
+    </div>
+{% endif %}
+
+{% endwith %}
+
+{% if current_user.is_authenticated %}
+<form method="POST" action="/consproducto">
+
+
+<div class="column is-4 is-offset-4">
+    <h3 style=color:green class="title">Consulta los Productos</h3>
+    <h3 style=color:green class="title">por rubro o nombre</h3>
+    <div class="box">
+        <form method="POST" action="/consproducto">
+
+
+          <div class="field">
+               <div class="control">
+<!--                    <p>El producto es: {{ productoactual }}</p> -->
+               </div>
+           </div>
+
+
+           <div class="field">
+             <div class="control">
+               <div class="select">
+                 <select name="rubro" required>
+                   <option>Rubro</option>
+                   <option>Bebidas</option>
+                   <option>Comida</option>
+                   <option>Para llevar</option>
+                 </select>
+               </div>
+             </div>
+           </div>
+
+<!--
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="number" name="codigo" placeholder="Consulta por codigo" autofocus="">
+                </div>
+            </div>
+-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="name" name="nombre" placeholder="Consulta por nombre" autofocus="">
+                </div>
+            </div>
+<!--
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="name" name="marca" placeholder="Consulta por marca" autofocus="">
+                </div>
+            </div>
+-->
+            <button class="button is-block is-info is-large is-fullwidth">Consulta</button>
+
+    </div>
+</div>
+</form>
+{% endif %}
+
+{% if not current_user.is_authenticated %}
+<section class="hero is-success">
+<div class="container">
+  <h1 class="title">
+    <div class="hero-body">No tiene autorización para acceder.
+      <div class="hero-body"><a href="{{ url_for('index') }}"> Volver al Inicio</a>.
+    </h1>
+</div>
+</section>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="title">
+ {{ nombre }} Gracias por enviar tu consulta!
+ Te responderemos a la brevedad
+</h1>
+
+<div class="notification is-success">
+    Ir a la <a href="{{ url_for('index') }}">pagina de Inicio</a>.
+</div>
+
+{% endblock %}

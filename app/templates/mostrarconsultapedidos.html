@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+  <div class="notification is-success">
+      Hay {{cantidad}} {{ messages[0] }}.
+  </div>
+{% endif %}
+{% endwith %}
+
+{% if current_user.is_authenticated %}
+<form method="POST" action="/mospedidos">
+
+<div class="column is-offset-2">
+      <table class="table table-striped table-hover table-bordered table-sm bg-white">
+        <thead>
+          <tr>
+            <td>Codigo del Pedido</td>
+            <td>Dni del Cliente</td>
+            <td>Nombre del Producto</td>
+            <td>Cantidad</td>
+            <td>Valor</td>
+            <td>Estado</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for nombre in nombre %}
+          <tr>
+            <td>{{nombre.idPedido}}</td>
+            <td>{{nombre.idClientePedido}}</td>
+
+            <td>{{nombre.idProductoPedido}}</td>
+            <td>{{nombre.cantidadProductoPedido}}</td>
+            <td>{{nombre.valorPedido}}</td>
+            <td>{{nombre.estadoPedido}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="column is-offset-0">
+        <br>
+      </div>
+      <div class="column is-offset-4">
+        <table class="table table-striped table-hover table-bordered table-sm bg-white">
+            <td>
+              <input type="submit" value="Finalizar Pedido sin Procesar y Realizar la Compra" class="btn btn-secondary"></input>
+            </td>
+
+
+<!--
+          <thead
+            <tr>
+              <td>Dni del Cliente</td>
+            </tr>
+          </thead>
+
+          <tbody>
+<!--
+              <td>
+                <input  type="number" name="cliente" size="10" required ></input>
+              </td>
+
+              <td>
+                <input type="submit" value="Finalizar Pedido y Realizar la Compra" class="btn btn-secondary"></input>
+              </td>
+          </tbody>
+-->
+        </table>
+      </div>
+  </form>
+
+
+
+{% endif %}
+
+
+ {% if not current_user.is_authenticated %}
+ <section class="hero is-success">
+ <div class="container">
+   <h1 class="title">
+     <div class="hero-body">No tiene autorización para acceder.
+       <div class="hero-body"><a href="{{ url_for('index') }}"> Volver al Inicio</a>.
+     </h1>
+ </div>
+ </section>
+ {% endif %}
+
+ {% endblock %}

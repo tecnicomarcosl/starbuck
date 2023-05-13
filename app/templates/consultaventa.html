@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+
+    <div class="notification is-success">
+        {{ messages[0] }}.
+    </div>
+{% endif %}
+
+{% endwith %}
+
+{% if current_user.is_authenticated %}
+<form method="POST" action="/consventa">
+
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Consultar Venta</h3>
+    <div class="box">
+        <form method="POST" action="/consventa">
+
+           <div class="field">
+               <div class="control" required>
+                   <input class="input is-large" type="number" name="idVenta" placeholder="Codigo de la Venta" autofocus="" >
+               </div>
+           </div>
+
+           <div class="field">
+               <div class="control">
+                   <input class="input is-large" type="number" name="idCliente" placeholder="Codigo de Cliente" autofocus="">
+               </div>
+           </div>
+
+           <div class="field">
+               <div class="control">
+                   <input class="input is-large" type="number" name="idUsuario" placeholder="Codigo de Usuario" autofocus="">
+               </div>
+           </div>
+
+           <div class="field">
+             <div class="control">
+               <div class="select">
+                 <select name="estadoVenta">
+                   <option>Estado de la Venta</option>
+                   <option>Procesada</option>
+                   <option>Pendiente</option>
+                 </select>
+               </div>
+             </div>
+           </div>
+
+
+           <div class="field">
+             <div class="control">
+               <div class="select">
+                 <select name="sucursal">
+                   <option>Consultar por Sucursal</option>
+                   <option>Ciudad de Córdoba</option>
+                   <option>Villa María</option>
+                   <option>Rio Cuarto</option>
+                   <option>Mendoza</option>
+                   <option>Rosario</option>
+                   <option>Santiago del Estero</option>
+                 </select>
+               </div>
+             </div>
+           </div>
+
+
+
+            <button class="button is-block is-info is-large is-fullwidth">Consulta</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% if not current_user.is_authenticated %}
+<section class="hero is-success">
+<div class="container">
+  <h1 class="title">
+    <div class="hero-body">No tiene autorización para acceder.
+      <div class="hero-body"><a href="{{ url_for('index') }}"> Volver al Inicio</a>.
+    </h1>
+</div>
+</section>
+{% endif %}
+
+{% endblock %}

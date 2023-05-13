@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="title">
+ {{ nombre }}, ingresaste correctamente!
+</h1>
+
+<h2 style="color:green" class="title">
+ Podes realizar tu pedido desde Menu
+</h2>
+
+{% if not current_user.is_authenticated %}
+<section class="hero is-success">
+<div class="container">
+  <h1 class="title">
+    <div class="hero-body">No tiene autorización para acceder.
+      <div class="hero-body"><a href="{{ url_for('index') }}"> Volver al Inicio</a>.
+    </h1>
+</div>
+</section>
+{% endif %}
+
+{% endblock %}

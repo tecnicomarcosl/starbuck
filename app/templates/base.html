@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Starbuck</title>
+    <link rel="stylesheet" href="static/css/bulma.css" media="screen" />
+    <link  rel="icon"   href="static/logo.png" type="image/png" />
+
+</head>
+
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+
+    <a class="navbar-item" href="{{ url_for('index') }}">
+      <img src="static/logo.png">
+    </a>
+    {% if not current_user.is_authenticated %}
+      <a href="{{ url_for('sobrenos') }}"  class="navbar-item" >
+        Sobre Nosotros
+      </a>
+    {% endif %}
+    {% if current_user.is_authenticated %}
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+    {% endif %}
+  </div>
+
+  {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('auth.signup') }}" class="button is-primary">
+            <strong>Registrarse</strong>
+        </a>
+        <a href="{{ url_for('auth.login') }}" class="button is-light">
+            Ingresar
+        </a>
+  {% endif %}
+
+          {% if current_user.is_authenticated %}
+          <div class="navbar-start">
+            <div class="navbar-item">
+              <div class="buttons">
+
+          <div id="navbarBasic1" class="navbar-menu">
+
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">
+                      Menu
+                      </a>
+                    <div class="navbar-dropdown">
+                      <a href="{{ url_for('consproducto.consproducto') }}" class="navbar-item">
+                      Consultas y armar Pedido
+                      </a>
+                     <!--
+                      <a href="{{ url_for('insproducto.insproducto') }}" class="navbar-item">
+                      Agregar Producto
+                      </a>
+                  -->
+                      <a href="{{ url_for('productostodos.productostodos') }}" class="navbar-item">
+                      Ver todos los Productos
+                      </a>
+                    </div>
+                </div>
+            </div>
+
+
+          <div class="navbar-start">
+          <div class="navbar-item has-dropdown is-hoverable">
+
+          <a class="navbar-link">
+            Pedidos
+          </a>
+
+          <div class="navbar-dropdown">
+              <a href="{{ url_for('ventastodos.ventastodos') }}" class="navbar-item">
+              Compras anteriores
+              </a>
+
+          <a href="{{ url_for('pedidostodos.pedidostodos') }}" class="navbar-item">
+          Ver Pedidos sin facturar
+          </a>
+
+          </div>
+          </div>
+          </div>
+
+<!--
+          <div class="navbar-start">
+              <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                    Clientes
+                    </a>
+                  <div class="navbar-dropdown">
+                    <a href="{{ url_for('conscliente.conscliente') }}" class="navbar-item">
+                    Consultas de Clientes
+                    </a>
+                    <a href="{{ url_for('inscliente.inscliente') }}" class="navbar-item">
+                    Agregar Clientes
+                    </a>
+                    <a href="{{ url_for('clientestodos.clientestodos') }}" class="navbar-item">
+                    Ver todos los Clientes
+                    </a>
+                  </div>
+              </div>
+          </div>
+-->
+
+
+
+          <a href="{{ url_for('auth.logout') }}" class="button is-light">
+            Salir
+          </a>
+
+          </div>
+
+
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+</nav>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        const boton = document.querySelector(".navbar-burger");
+        const menu = document.querySelector(".navbar-menu");
+        boton.onclick = () => {
+            menu.classList.toggle("is-active");
+            boton.classList.toggle("is-active");
+        };
+    });
+</script>
+
+    <section class="hero is-primary is-fullheight">
+
+        <div class="hero-head">
+        </div>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+               {% block content %}
+               {% endblock %}
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>

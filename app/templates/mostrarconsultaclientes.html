@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+  <div class="notification is-success">
+      Hay {{cantidad}} {{ messages[0] }}.
+  </div>
+{% endif %}
+{% endwith %}
+
+{% if current_user.is_authenticated %}
+<div class="column is-offset-1">
+      <table class="table table-striped table-hover table-bordered table-sm bg-white">
+        <thead>
+          <tr>
+            <td>Codigo de Cliente</td>
+            <td>Dni</td>
+            <td>Nombre</td>
+            <td>Email</td>
+            <td>Direccion</td>
+            <td>Sucursal de cliente</td>
+            <td>Nivel</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for nombre in nombre %}
+          <tr>
+            <td>{{nombre.idCliente}}</td>
+            <td>{{nombre.dniCliente}}</td>
+            <td>{{nombre.nombreCliente}}</td>
+            <td>{{nombre.emailCliente}}</td>
+            <td>{{nombre.direccionCliente}}</td>
+            <td>{{nombre.sucursalCliente}}</td>
+            <td>{{nombre.nivelCliente}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endif %}
+
+
+ {% if not current_user.is_authenticated %}
+ <section class="hero is-success">
+ <div class="container">
+   <h1 class="title">
+     <div class="hero-body">No tiene autorización para acceder.
+       <div class="hero-body"><a href="{{ url_for('index') }}"> Volver al Inicio</a>.
+     </h1>
+ </div>
+ </section>
+ {% endif %}
+
+ {% endblock %}
