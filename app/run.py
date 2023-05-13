@@ -22,8 +22,8 @@ from .bdd.models import db
 def create_app():
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = 'xoe2ra0p4dj9m5fx'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://jw1wrawozvzrdbbe:xoe2ra0p4dj9m5fx@jhdjjtqo9w5bzq2t.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/aa8zicujxqsgtcug'
+    app.config['SECRET_KEY'] = 'clave'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://URI'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
